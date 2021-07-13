@@ -21,6 +21,8 @@ pipeline {
                         junit '**/build/test-results/**/*.xml'
                     } finally {
                         sh "./gradlew collectResults"
+                        sh "unit-tests.csv unit-tests-${env.BUILD_NUMBER}.csv"
+                        archiveArtifacts artifacts: "unit-tests-${env.BUILD_NUMBER}.csv", followSymlinks: false
                     }
                 }
             }
